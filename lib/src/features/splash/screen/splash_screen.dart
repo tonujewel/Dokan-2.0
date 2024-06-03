@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return BlocListener<SplashBloc, SplashState>(
       listener: (context, state) {
         if (state is SplashLoaded) {
-          context.go(RouteConstant.home);
+          context.go(RouteConstant.login);
         }
       },
       child: Scaffold(
@@ -33,7 +33,9 @@ class _SplashScreenState extends State<SplashScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [SvgPicture.asset('assets/svg/logo.svg')],
+            children: [
+              SvgPicture.asset('assets/svg/logo.svg'),
+            ],
           ),
         ),
       ),

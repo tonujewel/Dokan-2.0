@@ -1,15 +1,25 @@
 import 'package:go_router/go_router.dart';
 
-import '../../feature/home_screen.dart';
-import '../../feature/splash/screen/splash_screen.dart';
+import '../../features/home_screen.dart';
+import '../../features/login/presentation/pages/login_screen.dart';
+import '../../features/splash/screen/splash_screen.dart';
 import 'route_constant.dart';
 
 final router = GoRouter(
   routes: [
+    // Splash
     GoRoute(
       path: RouteConstant.splash,
       builder: (context, state) => const SplashScreen(),
     ),
+
+    // Login
+    GoRoute(
+      path: RouteConstant.login,
+      builder: (context, state) => const LoginScreen(),
+    ),
+
+    // Home
     GoRoute(
       path: RouteConstant.home,
       builder: (context, state) => const HomeScreen(),
