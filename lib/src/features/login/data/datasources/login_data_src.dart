@@ -19,7 +19,7 @@ class LoginDataSrcImpl implements LoginDataSrc {
     try {
       final result = await client.post(url: UrlManager.loginUrl, params: params);
 
-      final res = UserModel.fromJson(jsonDecode(json.encode(result)));
+      UserModel res = UserModel.fromJson(json.decode(result));
 
       return res;
     } on ApiException {

@@ -6,3 +6,11 @@ abstract class LoginEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class DoLoginEvent extends LoginEvent {
+  final LoginReq req;
+  const DoLoginEvent({required this.req});
+
+  @override
+  List<Object> get props => [req];
+}
