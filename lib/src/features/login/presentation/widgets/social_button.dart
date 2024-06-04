@@ -12,11 +12,11 @@ class SocialButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        width: 40,
-        height: 40,
+        width: 50,
+        height: 50,
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(12.0),
           color: Colors.white,
           boxShadow: const [
             BoxShadow(

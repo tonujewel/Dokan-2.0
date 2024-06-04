@@ -1,4 +1,3 @@
-
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,6 +12,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginUsecases usecases;
   LoginBloc({required this.usecases}) : super(LoginInitial()) {
     on<DoLoginEvent>(_doLogin);
+    on<DoValidation>(_validation);
   }
 
   Future _doLogin(DoLoginEvent event, Emitter emit) async {
@@ -25,5 +25,22 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(LoginSuccessState());
       },
     );
+  }
+
+  void _validation(DoValidation event, Emitter emit) {
+    emit(LoginInitial());
+    if (event.username == "") {
+      emit(const LoginValidationErrorState(msg: "Username required"));
+      return;
+    }
+    if (event.password == "") {
+      emit(const LoginValidationErrorState(msg: "Password required"));
+      return;
+    }
+    if (event.password.length < 6) {
+      emit(const LoginValidationErrorState(msg: "Password must be at least 6 characters"));
+      return;
+    }
+    add(DoLoginEvent(req: LoginReq(username: event.username, password: event.password)));
   }
 }

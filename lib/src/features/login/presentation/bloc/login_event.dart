@@ -14,3 +14,10 @@ class DoLoginEvent extends LoginEvent {
   @override
   List<Object> get props => [req];
 }
+
+class DoValidation extends LoginEvent {
+  final String username;
+  final String password;
+
+  const DoValidation({required this.username, required this.password});
+}

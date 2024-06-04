@@ -28,7 +28,7 @@ class ProfileDataSrcImpl implements ProfileDataSrc {
     } on ApiException {
       rethrow;
     } catch (e) {
-      throw ApiException(message: e.toString(), statusCode: 505);
+      throw ApiException(message: e.toString(), code: 505);
     }
   }
 
@@ -43,7 +43,7 @@ class ProfileDataSrcImpl implements ProfileDataSrc {
     } on ApiException {
       rethrow;
     } catch (e) {
-      throw ApiException(message: e.toString(), statusCode: 505);
+      throw ApiException(message: e.toString(), code: 505);
     }
   }
 }

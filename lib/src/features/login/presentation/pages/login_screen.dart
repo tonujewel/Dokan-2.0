@@ -1,20 +1,21 @@
-import 'package:dokan/src/core/config/route_constant.dart';
-import 'package:dokan/src/core/utils/dialog_helper.dart';
-import 'package:dokan/src/core/widgets/vertical_margin.dart';
+import 'package:dokan/src/core/widgets/password_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/config/route_constant.dart';
+import '../../../../core/utils/dialog_helper.dart';
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/custom_text_field.dart';
+import '../../../../core/widgets/vertical_margin.dart';
 import '../bloc/login_bloc.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 
   final userNameController = TextEditingController(text: "tonujewel");
-  final passwordController = TextEditingController(text: "12345");
+  final passwordController = TextEditingController(text: "123456");
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +32,11 @@ class LoginScreen extends StatelessWidget {
 
         if (state is LoginSuccessState) {
           DialogHelper.hideLoading(context);
-
           context.go(RouteConstant.home);
+        }
+
+        if (state is LoginValidationErrorState) {
+          DialogHelper.errorDialog(context, state.msg);
         }
       },
       builder: (context, state) {
@@ -62,12 +66,9 @@ class LoginScreen extends StatelessWidget {
                   svgPath: 'assets/svg/profile.svg',
                 ),
                 const VerticalMargin(),
-                CustomTextField(
+                PasswordTextField(
                   controller: passwordController,
                   hints: 'Password',
-                  obscure: true,
-                  inputType: TextInputType.visiblePassword,
-                  svgPath: 'assets/svg/lock.svg',
                 ),
                 const VerticalMargin(),
                 const Row(
@@ -84,14 +85,12 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                const VerticalMargin(),
+                const VerticalMargin(height: 60),
                 CustomButton(
                   onTap: () {
-                    context.read<LoginBloc>().add(
-                          DoLoginEvent(
-                            req: LoginReq(username: userNameController.text, password: passwordController.text),
-                          ),
-                        );
+                    context
+                        .read<LoginBloc>()
+                        .add(DoValidation(username: userNameController.text, password: passwordController.text));
                   },
                   title: 'Login',
                 ),
@@ -105,7 +104,8 @@ class LoginScreen extends StatelessWidget {
                   ],
                 ),
                 const VerticalMargin(),
-                GestureDetector(
+                InkWell(
+                  onTap: () => context.push(RouteConstant.register),
                   child: const Text(
                     'Create New Account',
                     style: TextStyle(color: Color(0xff383C40), fontSize: 17, fontWeight: FontWeight.w300),

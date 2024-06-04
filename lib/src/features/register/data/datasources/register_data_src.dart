@@ -18,14 +18,12 @@ class RegisterDataSrcImpl implements RegisterDataSrc {
   Future<SuccessModel> doRegister(RegisterReq body) async {
     try {
       final result = await client.post(url: UrlManager.signUpURL, body: body.toJson());
-
       SuccessModel res = SuccessModel.fromJson(jsonDecode(result));
-
       return res;
     } on ApiException {
       rethrow;
     } catch (e) {
-      throw ApiException(message: e.toString(), statusCode: 505);
+      throw ApiException(message: e.toString(), code: 505);
     }
   }
 }

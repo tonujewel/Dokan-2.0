@@ -20,3 +20,11 @@ class LoginErrorState extends LoginState {
   @override
   List<Object> get props => [msg];
 }
+
+class LoginValidationErrorState extends LoginState {
+  final String msg;
+
+  const LoginValidationErrorState({required this.msg});
+  @override
+  List<Object> get props => [msg];
+}

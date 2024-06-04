@@ -1,3 +1,4 @@
+import 'package:dokan/src/features/register/presentation/pages/register_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/home_screen.dart';
@@ -24,6 +25,13 @@ final router = GoRouter(
       path: RouteConstant.home,
       builder: (context, state) => const HomeScreen(),
     ),
+
+    // Register
+    GoRoute(
+      path: RouteConstant.register,
+      builder: (context, state) => RegisterScreen(),
+    ),
+
     // GoRoute(
     //     path: AppConstant.details,
     //     builder: (context, state) {
