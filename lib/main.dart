@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'src/core/config/my_app.dart';
 import 'src/core/services/inection_container.dart';
+import 'src/features/main_screen/bloc/main_screen_bloc.dart';
 import 'src/features/splash/bloc/splash_bloc.dart';
 
 SharedPreferences? prefs;
@@ -21,6 +22,7 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => SplashBloc()),
+        BlocProvider(create: (_) => MainScreenBloc()),
         BlocProvider(create: (_) => sl<LoginBloc>()),
         BlocProvider(create: (_) => sl<RegisterBloc>()),
       ],

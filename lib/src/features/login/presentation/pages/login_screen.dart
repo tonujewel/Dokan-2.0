@@ -32,7 +32,7 @@ class LoginScreen extends StatelessWidget {
 
         if (state is LoginSuccessState) {
           DialogHelper.hideLoading(context);
-          context.go(RouteConstant.home);
+          context.go(RouteConstant.mainScreen);
         }
 
         if (state is LoginValidationErrorState) {

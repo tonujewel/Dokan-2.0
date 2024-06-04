@@ -15,7 +15,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
       if (token == "") {
         emit(SplashLoadedForLogin());
       } else {
-        emit(SplashLoadedForHome());
+        emit(SplashLoadedForMain());
       }
     });
   }
