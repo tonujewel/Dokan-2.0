@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/home_bloc.dart';
+import '../widgets/filter_bottom_sheet.dart';
 import '../widgets/product_container.dart';
 import '../widgets/title_row.dart';
-import 'widgets/filter_container.dart';
+import '../widgets/filter_container.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -36,12 +37,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 const TitleRow(),
                 SizedBox(height: kHeight * 0.03),
                 FilterContainer(
-                  onTap: () {},
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const FilterBottomSheet();
+                      },
+                    );
+                  },
                 ),
                 SizedBox(height: kHeight * 0.04),
                 Expanded(
                   child: GridView.builder(
-                    padding: EdgeInsets.zero,
+                    padding: const EdgeInsets.only(bottom: 40),
                     shrinkWrap: true,
                     itemCount: state.products.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -57,6 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
                 ),
+                // const VerticalMargin(height: 40),
               ],
             ),
           );
