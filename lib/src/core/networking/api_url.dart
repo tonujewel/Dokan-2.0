@@ -3,7 +3,7 @@ class UrlManager {
   static const _baseUrl = "https://apptest.dokandemo.com/wp-json";
 
   // Product list
-  static String loginUrl = "$_baseUrl/jwt-auth/v1/token?username=tonujewel&password=123456";
+  static String loginUrl = "$_baseUrl/jwt-auth/v1/token";
 
   // // Product list
   // static String searchUrl({required int perPage, required int page}) =>
