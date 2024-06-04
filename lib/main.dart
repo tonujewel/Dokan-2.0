@@ -2,6 +2,7 @@ import 'package:dokan/src/core/utils/shared_preference_utils.dart';
 import 'package:dokan/src/features/register/presentation/bloc/register_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'src/features/home/presentation/bloc/home_bloc.dart';
 import 'src/features/login/presentation/bloc/login_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,6 +26,7 @@ void main() async {
         BlocProvider(create: (_) => MainScreenBloc()),
         BlocProvider(create: (_) => sl<LoginBloc>()),
         BlocProvider(create: (_) => sl<RegisterBloc>()),
+        BlocProvider(create: (_) => sl<HomeBloc>()),
       ],
       child: const MyApp(),
     ),

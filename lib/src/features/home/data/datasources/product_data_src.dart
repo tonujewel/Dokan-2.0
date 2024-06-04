@@ -12,7 +12,8 @@ class ProductDataSrcImpl implements ProductDataSrc {
   @override
   Future<List<ProductModel>> getProducts() async {
     final String response = await rootBundle.loadString('assets/json/response.json');
-    final data = await json.decode(response); // TODO:: need to parse data
-    return [];
+    List<ProductModel> result = List<ProductModel>.from(json.decode(response).map((x) => ProductModel.fromJson(x)));
+
+    return result;
   }
 }

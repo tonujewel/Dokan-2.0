@@ -38,7 +38,7 @@ class ProductContainer extends StatelessWidget {
               width: kWidth,
               child: CachedNetworkImage(
                 fit: BoxFit.cover,
-                imageUrl: "",
+                imageUrl: data.imageUrl(),
                 placeholder: (context, url) => const ImageLoader(),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
@@ -59,6 +59,7 @@ class ProductContainer extends StatelessWidget {
                     style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16, fontFamily: 'Roboto'),
                   ),
                 ),
+                SizedBox(height: kHeight * 0.01),
                 Row(
                   children: [
                     Text(
@@ -70,9 +71,9 @@ class ProductContainer extends StatelessWidget {
                     ),
                     SizedBox(width: kWidth * 0.04),
                     Visibility(
-                      visible: true,
+                      visible: data.discountVisible(),
                       child: Text(
-                        '\$ ${data.price}',
+                        '\$ ${data.regularPrice}',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
