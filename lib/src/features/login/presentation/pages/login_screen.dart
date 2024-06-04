@@ -1,11 +1,12 @@
-import 'package:dokan/src/features/login/domain/entities/login_req.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/widgets/custom_button.dart';
 import '../../../../core/widgets/custom_text_field.dart';
+import '../../domain/entities/login_req.dart';
 import '../bloc/login_bloc.dart';
+import '../widgets/social_button.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -69,7 +70,7 @@ class LoginScreen extends StatelessWidget {
                   onTap: () {
                     context.read<LoginBloc>().add(
                           DoLoginEvent(
-                            req: LoginReq(username: "tonujewel", password: "123456"),
+                            req: LoginReq(username: "tonujewel", password: "12345"),
                           ),
                         );
                   },
@@ -96,37 +97,6 @@ class LoginScreen extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class SocialButton extends StatelessWidget {
-  const SocialButton({super.key, required this.iconPath, required this.onTap});
-
-  final String iconPath;
-  final Function() onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        width: 40,
-        height: 40,
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          color: Colors.white,
-          boxShadow: const [
-            BoxShadow(
-              color: Color(0x1a395ab8),
-              offset: Offset(0, 3),
-              blurRadius: 8,
-            ),
-          ],
-        ),
-        child: SvgPicture.asset(iconPath),
-      ),
     );
   }
 }

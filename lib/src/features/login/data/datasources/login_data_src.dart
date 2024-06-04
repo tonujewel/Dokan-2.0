@@ -25,7 +25,7 @@ class LoginDataSrcImpl implements LoginDataSrc {
     } on ApiException {
       rethrow;
     } catch (e) {
-      throw ApiException(message: e.toString(), statusCode: 505);
+      throw ApiException(message: e.toString(), code: 505);
     }
   }
 }

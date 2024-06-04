@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 
 class ApiException extends Equatable implements Exception {
-  const ApiException({required this.message, required this.statusCode});
+  const ApiException({required this.message, required this.code});
 
   final String message;
-  final int statusCode;
+  final int code;
 
   @override
-  List<Object?> get props => [message, statusCode];
+  List<Object?> get props => [message, code];
 }
