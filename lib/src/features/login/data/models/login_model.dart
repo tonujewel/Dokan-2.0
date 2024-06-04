@@ -1,14 +1,14 @@
-import '../../domain/entities/user_entity.dart';
+import '../../domain/entities/login_entity.dart';
 
-class UserModel extends UserEntity {
-  const UserModel({
+class LoginModel extends LoginEntity {
+  const LoginModel({
     required super.token,
     required super.userEmail,
     required super.userNiceName,
     required super.displayName,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+  factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
         token: json["token"],
         userEmail: json["user_email"],
         userNiceName: json["user_nicename"],

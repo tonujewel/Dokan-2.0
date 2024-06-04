@@ -1,7 +1,7 @@
 import '../../../../core/utils/typedef.dart';
 import '../entities/login_req.dart';
-import '../entities/user_entity.dart';
+import '../entities/login_entity.dart';
 
 abstract class LoginRepository {
-  ResultFuture<UserEntity> doLogin(LoginReq req);
+  ResultFuture<LoginEntity> doLogin(LoginReq req);
 }

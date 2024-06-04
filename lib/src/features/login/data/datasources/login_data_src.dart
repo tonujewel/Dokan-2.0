@@ -3,10 +3,10 @@ import 'dart:convert';
 import '../../../../core/errors/exceptions.dart';
 import '../../../../core/networking/api_url.dart';
 import '../../../../core/networking/dio_client.dart';
-import '../models/user_model.dart';
+import '../models/login_model.dart';
 
 abstract class LoginDataSrc {
-  Future<UserModel> loginRequest(Map<String, dynamic> params);
+  Future<LoginModel> loginRequest(Map<String, dynamic> params);
 }
 
 class LoginDataSrcImpl implements LoginDataSrc {
@@ -15,11 +15,11 @@ class LoginDataSrcImpl implements LoginDataSrc {
   LoginDataSrcImpl({required this.client});
 
   @override
-  Future<UserModel> loginRequest(Map<String, dynamic> params) async {
+  Future<LoginModel> loginRequest(Map<String, dynamic> params) async {
     try {
       final result = await client.post(url: UrlManager.loginUrl, params: params);
 
-      UserModel res = UserModel.fromJson(json.decode(result));
+      LoginModel res = LoginModel.fromJson(json.decode(result));
 
       return res;
     } on ApiException {

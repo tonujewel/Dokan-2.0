@@ -1,16 +1,16 @@
 import '../../../../core/usecases/usecases.dart';
 import '../../../../core/utils/typedef.dart';
 import '../entities/login_req.dart';
-import '../entities/user_entity.dart';
+import '../entities/login_entity.dart';
 import '../repositories/login_repository.dart';
 
-class LoginUsecases extends UsecaseWithParams<UserEntity, LoginReq> {
+class LoginUsecases extends UsecaseWithParams<LoginEntity, LoginReq> {
   final LoginRepository _repository;
 
   LoginUsecases({required LoginRepository repository}) : _repository = repository;
 
   @override
-  ResultFuture<UserEntity> call(LoginReq params) {
+  ResultFuture<LoginEntity> call(LoginReq params) {
     return _repository.doLogin(params);
   }
 }

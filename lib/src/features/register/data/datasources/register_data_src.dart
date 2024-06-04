@@ -17,7 +17,7 @@ class RegisterDataSrcImpl implements RegisterDataSrc {
   @override
   Future<SuccessModel> doRegister(RegisterReq body) async {
     try {
-      final result = await client.post(url: UrlManager.loginUrl, body: body.toJson());
+      final result = await client.post(url: UrlManager.signUpURL, body: body.toJson());
 
       SuccessModel res = SuccessModel.fromJson(jsonDecode(result));
 
