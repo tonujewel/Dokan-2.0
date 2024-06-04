@@ -48,6 +48,31 @@ class DialogHelper {
       },
     );
   }
+  static void successDialog(BuildContext context, String msg) {
+    // TODO:: need to redesign
+    showDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text(
+                  "Success",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
+                const Divider(),
+                Text(msg),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   static hideLoading(BuildContext context) {
     Navigator.of(context, rootNavigator: true).pop('dialog');
