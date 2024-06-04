@@ -17,7 +17,12 @@ class SplashLoading extends SplashState {
   List<Object> get props => [];
 }
 
-class SplashLoaded extends SplashState {
+class SplashLoadedForHome extends SplashState {
+  @override
+  List<Object> get props => [];
+}
+
+class SplashLoadedForLogin extends SplashState {
   @override
   List<Object> get props => [];
 }
