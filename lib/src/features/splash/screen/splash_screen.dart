@@ -1,3 +1,4 @@
+import 'package:dokan/src/core/utils/shared_preference_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -24,8 +25,11 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return BlocListener<SplashBloc, SplashState>(
       listener: (context, state) {
-        if (state is SplashLoaded) {
+        if (state is SplashLoadedForLogin) {
           context.go(RouteConstant.login);
+        }
+        if (state is SplashLoadedForHome) {
+          context.go(RouteConstant.home);
         }
       },
       child: Scaffold(

@@ -1,8 +1,8 @@
-import 'dart:developer';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/utils/shared_preference_utils.dart';
 import '../../domain/entities/login_req.dart';
 import '../../domain/usecases/login_usecases.dart';
 
@@ -16,8 +16,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Future _doLogin(DoLoginEvent event, Emitter emit) async {
+    emit(LoginLoadingState());
     final result = await usecases.call(event.req);
-
-    result.fold((l) => log("failed $l"), (r) => log("success $r"));
+    result.fold(
+      (l) => emit(LoginErrorState(msg: l.message)),
+      (r) {
+        SharedPrefUtil.storeToken(r.token);
+        emit(LoginSuccessState());
+      },
+    );
   }
 }

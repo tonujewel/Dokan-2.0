@@ -2,10 +2,11 @@ class UrlManager {
   // Base url
   static const _baseUrl = "https://apptest.dokandemo.com/wp-json";
 
-  // Product list
-  static String loginUrl = "$_baseUrl/jwt-auth/v1/token?username=tonujewel&password=123456";
+  static const String loginUrl = "$_baseUrl/jwt-auth/v1/token";
 
-  // // Product list
-  // static String searchUrl({required int perPage, required int page}) =>
-  //     "$_baseUrl/search/repositories?q=Flutter+language:dart&per_page=$perPage&sort=stars&page=$page";
+  static const String signUpURL = "$_baseUrl/wp/v2/users/register";
+
+  static const String profileInfoURL = "${_baseUrl}wp-json/wp/v2/users/me";
+
+  static const String updateProfileUrl = "${_baseUrl}wp-json/wp/v2/users/";
 }
