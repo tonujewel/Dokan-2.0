@@ -6,7 +6,7 @@ class UrlManager {
 
   static const String signUpURL = "$_baseUrl/wp/v2/users/register";
 
-  static const String profileInfoURL = "${_baseUrl}wp-json/wp/v2/users/me";
+  static const String profileInfoURL = "$_baseUrl/wp/v2/users/me";
 
   static const String updateProfileUrl = "${_baseUrl}wp-json/wp/v2/users/";
 }

@@ -30,6 +30,22 @@ class UserEntity extends Equatable {
       required this.slug,
       required this.registeredDate});
 
+  static const UserEntity empty = UserEntity(
+    id: 0,
+    username: '',
+    name: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    url: '',
+    description: '',
+    link: '',
+    locale: '',
+    nickname: '',
+    slug: '',
+    registeredDate: '',
+  );
+
   @override
   List<Object?> get props => [
         id,

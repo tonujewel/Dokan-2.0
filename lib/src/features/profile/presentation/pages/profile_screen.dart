@@ -8,8 +8,19 @@ import '../bloc/profile_bloc.dart';
 import '../widgets/outline_text_field.dart';
 import '../widgets/user_section.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  @override
+  void initState() {
+    context.read<ProfileBloc>().add(GetProfileData());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,24 +48,22 @@ class ProfileScreen extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                  const UserSection(firstName: "Jewel", lastName: "Rana", emailAddress: "tonujewel@gmail.com"),
+                  state.userEntity?.firstName == null
+                      ? const SizedBox()
+                      : UserSection(
+                          firstName: "${state.userEntity?.firstName}",
+                          lastName: "${state.userEntity?.lastName}",
+                          emailAddress: "${state.userEntity?.email}",
+                        ),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Container(
                       color: Colors.white,
                       child: ExpansionPanelList(
                           animationDuration: const Duration(milliseconds: 300),
-                          // expandedHeaderPadding: const EdgeInsets.all(10),
-                          // dividerColor: Colors.red,
                           elevation: 0,
                           expansionCallback: (int index, bool isExpanded) {
-                            // _controller.expandCollapsAction(isExpanded, index);
                             context.read<ProfileBloc>().add(ExpansionCollapsAction(index: index, value: isExpanded));
-
-                            //  print('index $index');
-                            // setState(() {
-                            //   _items[index].isExpanded = !isExpanded;
-                            // });
                           },
                           children: [
                             accountExpantionPanel(state.isAccountOpen, kWidth, kHeight),

@@ -3,6 +3,10 @@ import 'package:dokan/src/features/home/data/repositories/product_repository_imp
 import 'package:dokan/src/features/home/domain/repositories/product_repository.dart';
 import 'package:dokan/src/features/home/domain/usecases/get_products_usecase.dart';
 import 'package:dokan/src/features/home/presentation/bloc/home_bloc.dart';
+import 'package:dokan/src/features/profile/data/datasources/profile_data_src.dart';
+import 'package:dokan/src/features/profile/data/repositories/profile_repository_impl.dart';
+import 'package:dokan/src/features/profile/domain/repositories/profile_repository.dart';
+import 'package:dokan/src/features/profile/domain/usecases/get_profile_usecase.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../features/login/data/datasources/login_data_src.dart';
@@ -26,22 +30,25 @@ Future<void> init() async {
     ..registerFactory(() => LoginBloc(usecases: sl()))
     ..registerFactory(() => RegisterBloc(sl()))
     ..registerFactory(() => HomeBloc(sl()))
-    ..registerFactory(() => ProfileBloc())
+    ..registerFactory(() => ProfileBloc(sl()))
 
     // Use cases
     ..registerLazySingleton(() => LoginUsecases(repository: sl()))
     ..registerLazySingleton(() => RegisterUsecases(repository: sl()))
     ..registerLazySingleton(() => GetProductsUsecase(repository: sl()))
+    ..registerLazySingleton(() => GetProfileUsecase(repository: sl()))
 
     // repositories
     ..registerLazySingleton<LoginRepository>(() => LoginRepositoryImpl(dataSrc: sl()))
     ..registerLazySingleton<RegisterRepository>(() => RegisterRepositoryImpl(dataSrc: sl()))
     ..registerLazySingleton<ProductRepository>(() => ProductRepositoryImpl(dataSrc: sl()))
+    ..registerLazySingleton<ProfileRepository>(() => ProfileRepositoryImpl(dataSrc: sl()))
 
     // Data sources
     ..registerLazySingleton<LoginDataSrc>(() => LoginDataSrcImpl(client: sl()))
     ..registerLazySingleton<RegisterDataSrc>(() => RegisterDataSrcImpl(client: sl()))
     ..registerLazySingleton<ProductDataSrc>(() => ProductDataSrcImpl())
+    ..registerLazySingleton<ProfileDataSrc>(() => ProfileDataSrcImpl(client: sl()))
 
     // external dependencies
     ..registerLazySingleton(() => DioClient());

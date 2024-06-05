@@ -5,6 +5,8 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
+import '../utils/shared_preference_utils.dart';
+
 class DioClient {
   static const int timeoutDuration = 60;
 
@@ -15,6 +17,7 @@ class DioClient {
   Map<String, dynamic>? header = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
+    'Authorization': 'Bearer ${SharedPrefUtil.getToken()}',
   };
 
   //GET

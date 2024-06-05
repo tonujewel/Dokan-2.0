@@ -12,12 +12,16 @@ class ProfileInitial extends ProfileState {
   final bool isPasswordOpen;
   final bool isNotificationOpen;
   final bool isWishListOpen;
+  final String error;
+  final UserEntity? userEntity;
 
   const ProfileInitial({
-    this.isAccountOpen = false,
+    this.isAccountOpen = true,
     this.isPasswordOpen = false,
     this.isNotificationOpen = false,
     this.isWishListOpen = false,
+    this.error = "",
+    this.userEntity,
   });
 
   ProfileInitial copyWith({
@@ -25,12 +29,16 @@ class ProfileInitial extends ProfileState {
     bool? isPasswordOpen,
     bool? isNotificationOpen,
     bool? isWishListOpen,
+    String? error,
+    UserEntity? userEntity,
   }) {
     return ProfileInitial(
       isAccountOpen: isAccountOpen ?? this.isAccountOpen,
       isPasswordOpen: isPasswordOpen ?? this.isPasswordOpen,
       isNotificationOpen: isNotificationOpen ?? this.isNotificationOpen,
       isWishListOpen: isWishListOpen ?? this.isWishListOpen,
+      error: error ?? this.error,
+      userEntity: userEntity ?? this.userEntity,
     );
   }
 
