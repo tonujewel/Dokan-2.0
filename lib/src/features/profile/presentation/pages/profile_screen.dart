@@ -29,7 +29,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFFF8F8F8),
-      body: BlocBuilder<ProfileBloc, ProfileInitial>(
+      body: BlocConsumer<ProfileBloc, ProfileInitial>(
+        listener: (BuildContext context, ProfileInitial state) {
+          
+        },
         builder: (context, state) {
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: kWidth * 0.05),

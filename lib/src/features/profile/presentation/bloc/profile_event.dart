@@ -18,3 +18,12 @@ class ExpansionCollapsAction extends ProfileEvent {
 }
 
 class GetProfileData extends ProfileEvent {}
+
+class UpdateProfileData extends ProfileEvent {
+  final UpdateProfileReq body;
+
+  const UpdateProfileData({required this.body});
+
+  @override
+  List<Object> get props => [body];
+}
