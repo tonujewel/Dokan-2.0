@@ -8,3 +8,16 @@ abstract class HomeEvent extends Equatable {
 }
 
 class GerProductEvent extends HomeEvent {}
+
+class ApplyFilterEvent extends HomeEvent {
+  const ApplyFilterEvent();
+}
+
+class FilterOnChangeEvent extends HomeEvent {
+  final String title;
+
+  const FilterOnChangeEvent({required this.title});
+
+  @override
+  List<Object> get props => [title];
+}

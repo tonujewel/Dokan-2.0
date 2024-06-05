@@ -19,7 +19,7 @@ class ProductModel extends ProductEntity {
         dateCreated: json["date_created"] ?? "",
         description: json["description"] ?? "",
         price: json["price"] ?? "",
-        totalSales: json["totalSales"] ?? "",
+        totalSales: json["totalSales"] ?? "0",
         regularPrice: json["regular_price"] ?? "",
         averageRating: json["average_rating"] ?? "",
         images: json["images"] == null ? [] : List<ImageModel>.from(json["images"].map((x) => ImageModel.fromJson(x))),

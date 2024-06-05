@@ -36,16 +36,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(height: kHeight * 0.06),
                 const TitleRow(),
                 SizedBox(height: kHeight * 0.03),
-                FilterContainer(
-                  onTap: () {
-                    showModalBottomSheet(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return const FilterBottomSheet();
-                      },
-                    );
-                  },
-                ),
+                StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+                  return FilterContainer(
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return const FilterBottomSheet();
+                        },
+                      );
+                    },
+                  );
+                }),
+
                 SizedBox(height: kHeight * 0.04),
                 Expanded(
                   child: GridView.builder(
