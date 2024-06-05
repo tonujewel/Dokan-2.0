@@ -10,6 +10,7 @@ import '../../features/login/data/repositories/login_repository_impl.dart';
 import '../../features/login/domain/repositories/login_repository.dart';
 import '../../features/login/domain/usecases/login_usecases.dart';
 import '../../features/login/presentation/bloc/login_bloc.dart';
+import '../../features/profile/presentation/bloc/profile_bloc.dart';
 import '../../features/register/data/datasources/register_data_src.dart';
 import '../../features/register/data/repositories/register_repository_impl.dart';
 import '../../features/register/domain/repositories/register_repository.dart';
@@ -25,6 +26,7 @@ Future<void> init() async {
     ..registerFactory(() => LoginBloc(usecases: sl()))
     ..registerFactory(() => RegisterBloc(sl()))
     ..registerFactory(() => HomeBloc(sl()))
+    ..registerFactory(() => ProfileBloc())
 
     // Use cases
     ..registerLazySingleton(() => LoginUsecases(repository: sl()))

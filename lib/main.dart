@@ -1,4 +1,5 @@
 import 'package:dokan/src/core/utils/shared_preference_utils.dart';
+import 'package:dokan/src/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:dokan/src/features/register/presentation/bloc/register_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -27,6 +28,7 @@ void main() async {
         BlocProvider(create: (_) => sl<LoginBloc>()),
         BlocProvider(create: (_) => sl<RegisterBloc>()),
         BlocProvider(create: (_) => sl<HomeBloc>()),
+        BlocProvider(create: (_) => sl<ProfileBloc>()),
       ],
       child: const MyApp(),
     ),

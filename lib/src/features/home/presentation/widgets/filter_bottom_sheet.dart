@@ -81,30 +81,8 @@ class FilterBottomSheet extends StatelessWidget {
                     Row(
                       children: [
                         Flexible(
-                          child: TextButton(
-                            style: ButtonStyle(
-                              shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(7.0),
-                                  side: const BorderSide(color: Colors.black),
-                                ),
-                              ),
-                              shadowColor: MaterialStateProperty.all(const Color(0xFFF75F55)),
-                            ),
-                            onPressed: () => context.pop(),
-                            child: const SizedBox(
-                              width: double.infinity,
-                              child: Text(
-                                "Cancel",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontFamily: 'Roboto',
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0xFF818995),
-                                ),
-                              ),
-                            ),
+                          child: CancelButton(
+                            onTap: () => context.pop(),
                           ),
                         ),
                         SizedBox(width: kWidth * 0.05),
@@ -127,6 +105,44 @@ class FilterBottomSheet extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class CancelButton extends StatelessWidget {
+  const CancelButton({
+    super.key,
+    this.onTap,
+  });
+
+  final Function()? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      style: ButtonStyle(
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(7.0),
+            side: const BorderSide(color: Colors.black),
+          ),
+        ),
+        shadowColor: MaterialStateProperty.all(const Color(0xFFF75F55)),
+      ),
+      onPressed: onTap,
+      child: const SizedBox(
+        width: double.infinity,
+        child: Text(
+          "Cancel",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 18,
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.w500,
+            color: Color(0xFF818995),
+          ),
+        ),
+      ),
     );
   }
 }
