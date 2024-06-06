@@ -63,14 +63,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                  state.userEntity?.firstName == null
+                  state.firstName == ""
                       ? const SizedBox()
                       : UserSection(
-                          firstName: "${state.userEntity?.firstName}",
-                          lastName: "${state.userEntity?.lastName}",
-                          emailAddress: "${state.userEntity?.email}",
+                          firstName: state.firstName,
+                          lastName: state.lastName,
+                          emailAddress: state.email,
                         ),
-                  Text(state.error),
+                  Text(state.isAccountOpen.toString()),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Container(

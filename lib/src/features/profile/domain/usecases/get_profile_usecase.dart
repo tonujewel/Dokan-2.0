@@ -1,6 +1,6 @@
 import '../../../../core/usecases/usecases.dart';
 import '../../../../core/utils/typedef.dart';
-import '../../../register/domain/entities/success_entity.dart';
+import '../../data/models/user_model.dart';
 import '../entities/update_profile_req.dart';
 import '../entities/user_entity.dart';
 import '../repositories/profile_repository.dart';
@@ -16,12 +16,12 @@ class GetProfileUsecase extends UsecaseWithoutParams<UserEntity> {
   }
 }
 
-class UpdateProfileUseCase extends UsecaseWithParams<SuccessEntity, UpdateProfileReq> {
+class UpdateProfileUseCase extends UsecaseWithParams<UserModel, UpdateProfileReq> {
   final ProfileRepository repository;
 
   UpdateProfileUseCase({required this.repository});
   @override
-  ResultFuture<SuccessEntity> call(UpdateProfileReq params) {
+  ResultFuture<UserModel> call(UpdateProfileReq params) {
     return repository.updateProfile(params);
   }
 }

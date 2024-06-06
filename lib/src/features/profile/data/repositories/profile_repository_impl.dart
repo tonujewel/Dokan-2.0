@@ -8,6 +8,7 @@ import '../../../../core/utils/typedef.dart';
 import '../../domain/entities/user_entity.dart';
 import '../../domain/repositories/profile_repository.dart';
 import '../datasources/profile_data_src.dart';
+import '../models/user_model.dart';
 
 class ProfileRepositoryImpl implements ProfileRepository {
   final ProfileDataSrc dataSrc;
@@ -24,7 +25,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
   }
 
   @override
-  ResultFuture<SuccessEntity> updateProfile(UpdateProfileReq body) async {
+  ResultFuture<UserModel> updateProfile(UpdateProfileReq body) async {
     try {
       final result = await dataSrc.updateProfile(body);
       return Right(result);

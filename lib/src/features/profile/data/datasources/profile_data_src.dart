@@ -11,7 +11,7 @@ import '../../../../core/errors/exceptions.dart';
 
 abstract class ProfileDataSrc {
   Future<UserModel> getProfileData();
-  Future<SuccessModel> updateProfile(UpdateProfileReq body);
+  Future<UserModel> updateProfile(UpdateProfileReq body);
 }
 
 class ProfileDataSrcImpl implements ProfileDataSrc {
@@ -34,11 +34,12 @@ class ProfileDataSrcImpl implements ProfileDataSrc {
   }
 
   @override
-  Future<SuccessModel> updateProfile(UpdateProfileReq body) async {
+  Future<UserModel> updateProfile(UpdateProfileReq body) async {
     try {
       final result = await client.post(url: UrlManager.updateProfileUrl, body: body.toJson());
 
-      SuccessModel res = const SuccessModel(code: 200, msg: "Profile updated");
+      // SuccessModel res = const SuccessModel(code: 200, msg: "Profile updated");
+      UserModel res = UserModel.fromJson(json.decode(result));
 
       return res;
     } on ApiException catch (e) {

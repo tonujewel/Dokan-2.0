@@ -1,5 +1,7 @@
 import 'dart:developer';
+import 'dart:js_interop';
 
+import 'package:dokan/src/features/home/presentation/bloc/home_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -47,7 +49,12 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileInitial> {
         (userEntity) {
           log(userEntity.firstName);
           SharedPrefUtil.storeId("${userEntity.id}");
-          emit(state.copyWith(userEntity: userEntity));
+          // emit(state.copyWith(userEntity: userEntity));
+          emit(state.copyWith(
+              email: userEntity.email,
+              firstName: userEntity.firstName,
+              lastName: userEntity.lastName,
+              userEntity: userEntity));
         },
       );
     } catch (e) {
@@ -56,22 +63,22 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileInitial> {
   }
 
   void _updateProfileDataAction(UpdateProfileData event, Emitter emit) async {
+    final currentState = state;
     try {
       final result = await updateProfileUseCase.call(event.body);
       result.fold(
         (failure) {
           log("_updateProfileDataAction 1");
-          emit(state.copyWith(error: failure.message));
+          emit(currentState.copyWith(error: failure.message));
         },
         (userEntity) {
           log("_updateProfileDataAction 2");
-
-          // add(GetProfileData());
-          emit(state.copyWith(userEntity: null));
+          emit(currentState.copyWith(
+              email: userEntity.email, firstName: userEntity.firstName, lastName: userEntity.lastName));
         },
       );
     } catch (e) {
-      emit(state.copyWith(error: "Something went wrong"));
+      emit(currentState.copyWith(error: "Something went wrong"));
     }
   }
 }
