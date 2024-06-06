@@ -1,8 +1,9 @@
-import 'package:dokan/src/features/home/domain/entities/product_entity.dart';
-import 'package:dokan/src/features/home/presentation/widgets/loader.dart';
-import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
+import '../../domain/entities/product_entity.dart';
+import 'loader.dart';
 
 class ProductContainer extends StatelessWidget {
   const ProductContainer({super.key, required this.data});
@@ -37,6 +38,7 @@ class ProductContainer extends StatelessWidget {
               height: kHeight * 0.2,
               width: kWidth,
               child: CachedNetworkImage(
+                
                 fit: BoxFit.cover,
                 imageUrl: data.imageUrl(),
                 placeholder: (context, url) => const ImageLoader(),

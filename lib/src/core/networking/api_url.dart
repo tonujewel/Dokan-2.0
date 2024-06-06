@@ -1,3 +1,5 @@
+import 'package:dokan/src/core/utils/shared_preference_utils.dart';
+
 class UrlManager {
   // Base url
   static const _baseUrl = "https://apptest.dokandemo.com/wp-json";
@@ -8,5 +10,5 @@ class UrlManager {
 
   static const String profileInfoURL = "$_baseUrl/wp/v2/users/me";
 
-  static const String updateProfileUrl = "${_baseUrl}wp-json/wp/v2/users/";
+  static String updateProfileUrl = "$_baseUrl/wp/v2/users/${SharedPrefUtil.getId()}";
 }

@@ -46,13 +46,14 @@ class DioClient {
 
   //POST
 
-  Future<dynamic> post({required String url, Map<String, dynamic>? params, dynamic body}) async {
+  Future<dynamic> post(
+      {required String url, Map<String, dynamic>? params, dynamic body, Map<String, dynamic>? headers}) async {
     var payload = json.encode(body);
     try {
       var response = await _dio
           .post(
             url,
-            options: Options(headers: header),
+            options: Options(headers: headers ?? header),
             queryParameters: params,
             data: payload,
           )

@@ -27,3 +27,4 @@ class UpdateProfileData extends ProfileEvent {
   @override
   List<Object> get props => [body];
 }
+

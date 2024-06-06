@@ -17,7 +17,10 @@ class LoginDataSrcImpl implements LoginDataSrc {
   @override
   Future<LoginModel> loginRequest(Map<String, dynamic> params) async {
     try {
-      final result = await client.post(url: UrlManager.loginUrl, params: params);
+      final result = await client.post(
+          url: UrlManager.loginUrl,
+          params: params,
+          headers: {'Accept': 'application/json', 'Content-Type': 'application/json'});
 
       LoginModel res = LoginModel.fromJson(json.decode(result));
 

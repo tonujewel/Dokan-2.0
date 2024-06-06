@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dokan/src/core/networking/api_url.dart';
 import 'package:dokan/src/core/networking/dio_client.dart';
@@ -35,14 +36,16 @@ class ProfileDataSrcImpl implements ProfileDataSrc {
   @override
   Future<SuccessModel> updateProfile(UpdateProfileReq body) async {
     try {
-      final result = await client.post(url: UrlManager.updateProfileUrl);
+      final result = await client.post(url: UrlManager.updateProfileUrl, body: body.toJson());
 
-      SuccessModel res = SuccessModel.fromJson(json.decode(result));
+      SuccessModel res = const SuccessModel(code: 200, msg: "Profile updated");
 
       return res;
-    } on ApiException {
+    } on ApiException catch (e) {
+      log(e.toString());
       rethrow;
     } catch (e) {
+      log(e.toString());
       throw ApiException(message: e.toString(), code: 505);
     }
   }

@@ -13,4 +13,11 @@ class SharedPrefUtil {
   static storeToken(String token) {
     return prefs?.setString("token", token);
   }
+  static String getId() {
+    return prefs?.getString("ID") ?? "";
+  }
+
+  static storeId(String token) {
+    return prefs?.setString("ID", token);
+  }
 }

@@ -30,7 +30,7 @@ Future<void> init() async {
     ..registerFactory(() => LoginBloc(usecases: sl()))
     ..registerFactory(() => RegisterBloc(sl()))
     ..registerFactory(() => HomeBloc(sl()))
-    ..registerFactory(() => ProfileBloc(sl(),sl()))
+    ..registerFactory(() => ProfileBloc(sl(), sl()))
 
     // Use cases
     ..registerLazySingleton(() => LoginUsecases(repository: sl()))
@@ -52,5 +52,5 @@ Future<void> init() async {
     ..registerLazySingleton<ProfileDataSrc>(() => ProfileDataSrcImpl(client: sl()))
 
     // external dependencies
-    ..registerLazySingleton(() => DioClient());
+    ..registerFactory(() => DioClient());
 }

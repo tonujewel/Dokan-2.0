@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/utils/shared_preference_utils.dart';
 import '../../domain/entities/update_profile_req.dart';
 import '../../domain/entities/user_entity.dart';
 import '../../domain/usecases/get_profile_usecase.dart';
@@ -45,6 +46,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileInitial> {
         (failure) => emit(state.copyWith(error: failure.message)),
         (userEntity) {
           log(userEntity.firstName);
+          SharedPrefUtil.storeId("${userEntity.id}");
           emit(state.copyWith(userEntity: userEntity));
         },
       );
@@ -57,10 +59,15 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileInitial> {
     try {
       final result = await updateProfileUseCase.call(event.body);
       result.fold(
-        (failure) => emit(state.copyWith(error: failure.message)),
+        (failure) {
+          log("_updateProfileDataAction 1");
+          emit(state.copyWith(error: failure.message));
+        },
         (userEntity) {
-          // log(userEntity.firstName);
-          // emit(state.copyWith(userEntity: userEntity));
+          log("_updateProfileDataAction 2");
+
+          // add(GetProfileData());
+          emit(state.copyWith(userEntity: null));
         },
       );
     } catch (e) {

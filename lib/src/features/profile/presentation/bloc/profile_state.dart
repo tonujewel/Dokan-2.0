@@ -14,6 +14,7 @@ class ProfileInitial extends ProfileState {
   final bool isWishListOpen;
   final String error;
   final UserEntity? userEntity;
+  final bool isLoading;
 
   const ProfileInitial({
     this.isAccountOpen = true,
@@ -22,6 +23,7 @@ class ProfileInitial extends ProfileState {
     this.isWishListOpen = false,
     this.error = "",
     this.userEntity,
+    this.isLoading = false,
   });
 
   ProfileInitial copyWith({
@@ -31,6 +33,7 @@ class ProfileInitial extends ProfileState {
     bool? isWishListOpen,
     String? error,
     UserEntity? userEntity,
+    bool? isLoading,
   }) {
     return ProfileInitial(
       isAccountOpen: isAccountOpen ?? this.isAccountOpen,
@@ -38,7 +41,8 @@ class ProfileInitial extends ProfileState {
       isNotificationOpen: isNotificationOpen ?? this.isNotificationOpen,
       isWishListOpen: isWishListOpen ?? this.isWishListOpen,
       error: error ?? this.error,
-      userEntity: userEntity ?? this.userEntity,
+      userEntity: userEntity,
+      isLoading: isLoading ?? this.isLoading,
     );
   }
 

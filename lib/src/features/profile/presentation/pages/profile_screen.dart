@@ -4,6 +4,8 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/widgets/custom_button.dart';
 import '../../../home/presentation/widgets/filter_bottom_sheet.dart';
+import '../../domain/entities/update_profile_req.dart';
+import '../../domain/entities/user_entity.dart';
 import '../bloc/profile_bloc.dart';
 import '../widgets/outline_text_field.dart';
 import '../widgets/user_section.dart';
@@ -27,11 +29,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final kHeight = MediaQuery.of(context).size.height;
     final kWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.read<ProfileBloc>().add(GetProfileData());
+        },
+      ),
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFFF8F8F8),
       body: BlocConsumer<ProfileBloc, ProfileInitial>(
-        listener: (BuildContext context, ProfileInitial state) {
-          
+        listener: (BuildContext context, ProfileState state) {
+          // log("message");
+          // if (state is ProfileInitial && state.isLoading) {
+          //   DialogHelper.showLoading(context);
+          // } else {
+          //   DialogHelper.hideLoading(context);
+          // }
         },
         builder: (context, state) {
           return Padding(
@@ -58,6 +70,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           lastName: "${state.userEntity?.lastName}",
                           emailAddress: "${state.userEntity?.email}",
                         ),
+                  Text(state.error),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Container(
@@ -69,7 +82,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             context.read<ProfileBloc>().add(ExpansionCollapsAction(index: index, value: isExpanded));
                           },
                           children: [
-                            accountExpantionPanel(state.isAccountOpen, kWidth, kHeight),
+                            accountExpantionPanel(state.isAccountOpen, kWidth, kHeight, state.userEntity),
                             passwordExpantionPanel(state.isPasswordOpen, kWidth, kHeight),
                             notificationExpantionPanel(state.isNotificationOpen, kWidth, kHeight),
                             wishListExpantionPanel(state.isWishListOpen, kWidth, kHeight),
@@ -86,7 +99,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  ExpansionPanel accountExpantionPanel(bool isExpanded, double kWidth, double kHeight) {
+  ExpansionPanel accountExpantionPanel(bool isExpanded, double kWidth, double kHeight, UserEntity? userEntity) {
+    final firstNameController = TextEditingController(text: userEntity?.firstName ?? "");
+    final lastNameNameController = TextEditingController(text: userEntity?.lastName ?? "");
     return ExpansionPanel(
       canTapOnHeader: true,
       isExpanded: isExpanded,
@@ -105,9 +120,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             SizedBox(height: kHeight * 0.02),
-            const OutlineTextField(
+            OutlineTextField(
               enable: false,
               hintText: 'youremail@xmail.com',
+              controller: TextEditingController(text: userEntity?.email ?? ""),
             ),
 
             SizedBox(height: kHeight * 0.03),
@@ -121,9 +137,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             SizedBox(height: kHeight * 0.02),
-            const OutlineTextField(
+            OutlineTextField(
               enable: false,
               hintText: 'username',
+              controller: TextEditingController(text: userEntity?.username ?? ""),
             ),
             SizedBox(height: kHeight * 0.03),
             // First name
@@ -135,8 +152,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             SizedBox(height: kHeight * 0.02),
-            const OutlineTextField(
+            OutlineTextField(
               hintText: 'First Name',
+              controller: firstNameController,
             ),
             SizedBox(height: kHeight * 0.03),
             // Apt, Suite, Bldg (optional)
@@ -148,8 +166,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             SizedBox(height: kHeight * 0.02),
-            const OutlineTextField(
+            OutlineTextField(
               hintText: 'Last Name',
+              controller: lastNameNameController,
             ),
             SizedBox(height: kHeight * 0.03),
 
@@ -164,6 +183,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     backGroundColor: const Color(0xFF1ABC9C),
                     onTap: () {
                       //  _controller.updateUserInfo()
+                      context.read<ProfileBloc>().add(UpdateProfileData(
+                          body: UpdateProfileReq(
+                              firstName: firstNameController.text, lastName: lastNameNameController.text)));
                     },
                     title: 'Save',
                   ),

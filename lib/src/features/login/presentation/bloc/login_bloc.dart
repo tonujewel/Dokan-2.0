@@ -22,6 +22,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       (l) => emit(LoginErrorState(msg: l.message)),
       (r) {
         SharedPrefUtil.storeToken(r.token);
+
         emit(LoginSuccessState());
       },
     );
